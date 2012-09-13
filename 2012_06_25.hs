@@ -45,7 +45,6 @@ iso n (Node l v r) =
    Use it to compare keys (parameter k). It returns True when k1 < k2.
 -}
 
-
 data NTree a = NTree a [NTree a] deriving Show
 
 sortNT :: (Eq k ) => (k -> k -> Bool) -> NTree (k, v) -> NTree (k, v)
