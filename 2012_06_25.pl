@@ -47,3 +47,23 @@ unique([M|L], Acc, UL) :-
 	\+ member(M, Acc),
 	!,
 	unique(L, [M|Acc], UL).
+
+/*
+ * Binary Search Tree Bubble
+ *
+ * You are given a binary search tree, which is a recurive DS in the form of
+ * t(Left, Value, Right). You are also given a value. Transform the tree
+ * in a way that you get the given value into the root of the tree.
+ *
+ * transf(+BST, +V, -BST)
+ */
+
+transf(t(L, V, R), V, t(L, V, R)).
+transf(t(L, V, R), X, NewTree) :-
+	X < V,
+	transf(L, X, t(CL, X, CR)),
+	NewTree = t(CL, X, t(CR, V, R)).
+transf(t(L, V, R), X, NewTree) :-
+	X > V,
+	transf(R, X, t(CL, X, CR)),
+	NewTree = t(t(L, V, CL), X, CR).
