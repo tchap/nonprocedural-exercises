@@ -30,9 +30,12 @@ cmpm m1 m2
 
       data NTree a = NTree a [NTree a]
 
-  The output data structure is
+  , to a binary tree, that is
 
       data BTree a = Void | BTree (BTree a) a (BTree a)
+
+  Note that it is NOT a binary SEARCH tree that you are being asked for,
+  it's your choice what you place into the newly created nodes as values.
 -}
 
 data NTree a = NTree a [NTree a] deriving Show
