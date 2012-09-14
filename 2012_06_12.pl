@@ -18,7 +18,6 @@ orders([R|Rs], Orders) :-
 
 orders([], _, Acc, Acc).
 orders([E|Es], Table, Acc, Orders) :-
-	[[N|_]|_] = Table,
 	oploop(E, E, Table, 1, OrdE),
 	orders(Es, Table, [E-OrdE|Acc], Orders).
 
@@ -45,3 +44,28 @@ at(R, C, [_|Rows], E) :-
 	at(NewR, C, Rows, E),
 	R is NewR + 1,
 	R \= 1.
+
+/*
+ * Maximal Independent Set
+ *
+ * Given a graph in the form of [X->[N1, N2, ...], ...], find one of the maximal
+ * independent sets of vertices. Independent means that no two vertices
+ * are connected with an edge. Maximal means that if you add any single vertex
+ * to the set, it will be connected to some other in the same set.
+ *
+ * max_indep_set(+Graph, -Set)
+ */ 
+
+:- op(500, xfx, '->').
+
+max_indep_set(Graph, Set) :-
+	mis(Graph, [], [], Set).
+
+mis([], _, Acc, Acc).
+mis([E->Ns|Es], BlackList, Indep, ISet) :-
+	((member(N, Ns), member(N, Indep)) ; member(E, BlackList)),
+	!,
+	mis(Es, BlackList, Indep, ISet).
+mis([E->Ns|Es], BlackList, Indep, ISet) :-
+	append(Ns, BlackList, NewBL),
+	mis(Es, NewBL, [E|Indep], ISet).
