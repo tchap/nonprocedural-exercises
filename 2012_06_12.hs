@@ -4,13 +4,24 @@
   The list of works returned shall be alphabetically sorted.
 -}
 
-differByMax :: Int -> String -> [String]
-differByMax 0 word = [word]
-differByMax _ ""   = [""]
-differByMax n (c:suffix) =
+differInMax :: Int -> String -> [String]
+differInMax 0 word = [word]
+differInMax _ ""   = [""]
+differInMax n (c:suffix) =
   [
     (ac:gensuffix) | ac <- alphabet, 
                      let i = if ac == c then 0 else 1,
-		     gensuffix <- differByMax (n-i) suffix
+		     gensuffix <- differInMax (n-i) suffix
   ]
   where alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+{-
+  Generate all factors of the number given. 
+-}
+
+factors n = factors' n 2 [] 
+
+factors' n k acc
+  | n == 1 = reverse acc
+  | n `mod` k == 0 = factors' (n `div` k) 2 (k:acc)
+  | otherwise = factors' n (k+1) acc
