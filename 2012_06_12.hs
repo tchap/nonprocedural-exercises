@@ -26,6 +26,7 @@ factors n
 
 factors' :: Int -> Int -> [Int] -> [Int]
 factors' n k acc
-  | n == 1 = reverse acc
+  | n == k = reverse (n:acc)
   | n `mod` k == 0 = factors' (n `div` k) 2 (k:acc)
+  | k > (ceiling $ sqrt $ fromInteger $ toInteger n) = reverse (n:acc)
   | otherwise = factors' n (k+1) acc
