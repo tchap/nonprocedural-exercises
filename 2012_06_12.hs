@@ -19,8 +19,12 @@ differInMax n (c:suffix) =
   Generate all factors of the number given. 
 -}
 
-factors n = factors' n 2 [] 
+factors :: Int -> Maybe [Int]
+factors n
+  | n > 1 = Just $ factors' n 2 [] 
+  | otherwise = Nothing
 
+factors' :: Int -> Int -> [Int] -> [Int]
 factors' n k acc
   | n == 1 = reverse acc
   | n `mod` k == 0 = factors' (n `div` k) 2 (k:acc)
