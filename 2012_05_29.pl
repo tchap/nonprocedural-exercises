@@ -26,13 +26,15 @@ switch(1, 0).
  * Given a directed graph without circles and multiedges and a set of vertices,
  * modify the graph in a way that all the vertices in the set are colapsed into
  * a single new vertex. Make sure that there are again no circles and multiedges.
+ *
+ * collapse(+Graph, +SetOfVertices, -ColapsedGraph)
  */
 
 :- op(400, xfx, '->').
 
-colapse(G, Vs, NewG) :-
-	rename(G, Vs, colapsed, NewG),
-	\+ path(NewG, colapsed, colapsed).
+collapse(G, Vs, NewG) :-
+	rename(G, Vs, collapsed, NewG),
+	\+ path(NewG, collapsed, colapsed).
 
 rename(G, Vs, NewV, [NewV->Out|TempG]) :-
 	rename(G, Vs, NewV, [], TempOut, [], TempG),
