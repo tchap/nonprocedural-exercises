@@ -34,7 +34,7 @@ switch(1, 0).
 
 collapse(G, Vs, NewG) :-
 	rename(G, Vs, collapsed, NewG),
-	\+ path(NewG, collapsed, colapsed).
+	\+ path(NewG, collapsed, collapsed).
 
 rename(G, Vs, NewV, [NewV->Out|TempG]) :-
 	rename(G, Vs, NewV, [], TempOut, [], TempG),
