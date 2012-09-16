@@ -26,6 +26,9 @@ toEquiv = closureT . closureRS
 	  where closure = nub $ [(a,d) | (a,b) <- r,
 	                                 (c,d) <- r,
 					 b == c
+					 -- possible to add
+					 -- not $ (a,d) `elem` r
+					 -- instead of nub
 				]
 				++
 				r
