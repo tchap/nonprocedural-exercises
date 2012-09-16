@@ -14,7 +14,7 @@ genPerms sorted = [(x:xs) | x <- sorted, xs <- genPerms (delete x sorted)]
 
 {-
   Given a relation defined by a list of pairs of elements, add pairs to this list
-  so that the relation is equivalence (reflexive, transitive, symmetric)
+  so that the relation is equivalence (reflexive, transitive, symmetric).
 -}
 
 toEquiv :: Eq a => [(a, a)] -> [(a, a)]
